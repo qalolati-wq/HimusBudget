@@ -1,0 +1,1649 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#171A33">
+<link rel="manifest" href="data:application/manifest+json;base64,eyJuYW1lIjogIkhpTXUncyBCdWRnZXQiLCAic2hvcnRfbmFtZSI6ICJIaU11IEJ1ZGdldCIsICJkZXNjcmlwdGlvbiI6ICJNb250aGx5IGJ1ZGdldCB0cmFja2VyIGluIFRha2EiLCAic3RhcnRfdXJsIjogIi4vaGltdXMtYnVkZ2V0Lmh0bWwiLCAiZGlzcGxheSI6ICJzdGFuZGFsb25lIiwgIm9yaWVudGF0aW9uIjogInBvcnRyYWl0IiwgImJhY2tncm91bmRfY29sb3IiOiAiIzE3MUEzMyIsICJ0aGVtZV9jb2xvciI6ICIjMTcxQTMzIiwgImljb25zIjogW3sic3JjIjogImRhdGE6aW1hZ2Uvc3ZnK3htbDtiYXNlNjQsUEhOMlp5QjRiV3h1Y3owaWFIUjBjRG92TDNkM2R5NTNNeTV2Y21jdk1qQXdNQzl6ZG1jaUlIWnBaWGRDYjNnOUlqQWdNQ0F5TURBZ01qQXdJajRLUEdOcGNtTnNaU0JqZUQwaU1UQXdJaUJqZVQwaU1UQXdJaUJ5UFNJNU9DSWdabWxzYkQwaUl6QTBOa0V6T0NJZ2MzUnliMnRsUFNJak1EQXdNREF3SWlCemRISnZhMlV0ZDJsa2RHZzlJallpTHo0S1BHTnBjbU5zWlNCamVEMGlNVEF3SWlCamVUMGlNVEF3SWlCeVBTSTFNaUlnWm1sc2JEMGlJMFEwTWtVeVJTSXZQZ284ZEdWNGRDQjRQU0l4TURBaUlIazlJakV5TXlJZ1ptOXVkQzFtWVcxcGJIazlJa2RsYjNKbmFXRXNJSE5sY21sbUlpQm1iMjUwTFhOcGVtVTlJamN5SWlCbWIyNTBMWGRsYVdkb2REMGlOekF3SWlCbWFXeHNQU0lqUmpSRlJVUkVJaUIwWlhoMExXRnVZMmh2Y2owaWJXbGtaR3hsSWo3Z3A3TThMM1JsZUhRK0Nqd3ZjM1puUGc9PSIsICJzaXplcyI6ICIxOTJ4MTkyIiwgInR5cGUiOiAiaW1hZ2Uvc3ZnK3htbCIsICJwdXJwb3NlIjogImFueSJ9LCB7InNyYyI6ICJkYXRhOmltYWdlL3N2Zyt4bWw7YmFzZTY0LFBITjJaeUI0Yld4dWN6MGlhSFIwY0RvdkwzZDNkeTUzTXk1dmNtY3ZNakF3TUM5emRtY2lJSFpwWlhkQ2IzZzlJakFnTUNBeU1EQWdNakF3SWo0S1BHTnBjbU5zWlNCamVEMGlNVEF3SWlCamVUMGlNVEF3SWlCeVBTSTVPQ0lnWm1sc2JEMGlJekEwTmtFek9DSWdjM1J5YjJ0bFBTSWpNREF3TURBd0lpQnpkSEp2YTJVdGQybGtkR2c5SWpZaUx6NEtQR05wY21Oc1pTQmplRDBpTVRBd0lpQmplVDBpTVRBd0lpQnlQU0kxTWlJZ1ptbHNiRDBpSTBRME1rVXlSU0l2UGdvOGRHVjRkQ0I0UFNJeE1EQWlJSGs5SWpFeU15SWdabTl1ZEMxbVlXMXBiSGs5SWtkbGIzSm5hV0VzSUhObGNtbG1JaUJtYjI1MExYTnBlbVU5SWpjeUlpQm1iMjUwTFhkbGFXZG9kRDBpTnpBd0lpQm1hV3hzUFNJalJqUkZSVVJFSWlCMFpYaDBMV0Z1WTJodmNqMGliV2xrWkd4bElqN2dwN004TDNSbGVIUStDand2YzNablBnPT0iLCAic2l6ZXMiOiAiNTEyeDUxMiIsICJ0eXBlIjogImltYWdlL3N2Zyt4bWwiLCAicHVycG9zZSI6ICJhbnkifSwgeyJzcmMiOiAiZGF0YTppbWFnZS9zdmcreG1sO2Jhc2U2NCxQSE4yWnlCNGJXeHVjejBpYUhSMGNEb3ZMM2QzZHk1M015NXZjbWN2TWpBd01DOXpkbWNpSUhacFpYZENiM2c5SWpBZ01DQXlNREFnTWpBd0lqNEtQR05wY21Oc1pTQmplRDBpTVRBd0lpQmplVDBpTVRBd0lpQnlQU0k1T0NJZ1ptbHNiRDBpSXpBME5rRXpPQ0lnYzNSeWIydGxQU0lqTURBd01EQXdJaUJ6ZEhKdmEyVXRkMmxrZEdnOUlqWWlMejRLUEdOcGNtTnNaU0JqZUQwaU1UQXdJaUJqZVQwaU1UQXdJaUJ5UFNJMU1pSWdabWxzYkQwaUkwUTBNa1V5UlNJdlBnbzhkR1Y0ZENCNFBTSXhNREFpSUhrOUlqRXlNeUlnWm05dWRDMW1ZVzFwYkhrOUlrZGxiM0puYVdFc0lITmxjbWxtSWlCbWIyNTBMWE5wZW1VOUlqY3lJaUJtYjI1MExYZGxhV2RvZEQwaU56QXdJaUJtYVd4c1BTSWpSalJGUlVSRUlpQjBaWGgwTFdGdVkyaHZjajBpYldsa1pHeGxJajdncDdNOEwzUmxlSFErQ2p3dmMzWm5QZz09IiwgInNpemVzIjogIjUxMng1MTIiLCAidHlwZSI6ICJpbWFnZS9zdmcreG1sIiwgInB1cnBvc2UiOiAibWFza2FibGUifV19">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMDAgMjAwIj4KPGNpcmNsZSBjeD0iMTAwIiBjeT0iMTAwIiByPSI5OCIgZmlsbD0iIzA0NkEzOCIgc3Ryb2tlPSIjMDAwMDAwIiBzdHJva2Utd2lkdGg9IjYiLz4KPGNpcmNsZSBjeD0iMTAwIiBjeT0iMTAwIiByPSI1MiIgZmlsbD0iI0Q0MkUyRSIvPgo8dGV4dCB4PSIxMDAiIHk9IjEyMyIgZm9udC1mYW1pbHk9Ikdlb3JnaWEsIHNlcmlmIiBmb250LXNpemU9IjcyIiBmb250LXdlaWdodD0iNzAwIiBmaWxsPSIjRjRFRUREIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj7gp7M8L3RleHQ+Cjwvc3ZnPg==">
+<link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMDAgMjAwIj4KPGNpcmNsZSBjeD0iMTAwIiBjeT0iMTAwIiByPSI5OCIgZmlsbD0iIzA0NkEzOCIgc3Ryb2tlPSIjMDAwMDAwIiBzdHJva2Utd2lkdGg9IjYiLz4KPGNpcmNsZSBjeD0iMTAwIiBjeT0iMTAwIiByPSI1MiIgZmlsbD0iI0Q0MkUyRSIvPgo8dGV4dCB4PSIxMDAiIHk9IjEyMyIgZm9udC1mYW1pbHk9Ikdlb3JnaWEsIHNlcmlmIiBmb250LXNpemU9IjcyIiBmb250LXdlaWdodD0iNzAwIiBmaWxsPSIjRjRFRUREIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj7gp7M8L3RleHQ+Cjwvc3ZnPg==">
+<title>HiMu's Budget</title>
+<style>
+  :root{
+    --navy: #171A33;
+    --navy-2: #20244A;
+    --navy-3: #2A2F5C;
+    --mustard: #E7B23C;
+    --mustard-dim: #C99A2E;
+    --cream: #F4EEDD;
+    --cream-dim: #B9B6A8;
+    --green: #4FA37A;
+    --red: #D96C5C;
+    --line: rgba(231,178,60,0.18);
+    --radius-sm: 6px;
+    --radius-md: 10px;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background: var(--navy);
+    color: var(--cream);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans", Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+    padding-bottom: 78px;
+  }
+  .display{
+    font-family: Georgia, "Noto Serif", "Times New Roman", serif;
+  }
+
+  /* Header */
+  header.app-header{
+    position: sticky; top:0; z-index: 20;
+    background: linear-gradient(180deg, var(--navy) 80%, rgba(23,26,51,0));
+    padding: 14px 16px 10px 16px;
+    display:flex; align-items:center; gap:12px;
+  }
+  .bd-logo{
+    width:42px; height:42px; border-radius:50%;
+    background: #046A38;
+    display:flex; align-items:center; justify-content:center;
+    flex: 0 0 auto;
+    position: relative;
+    box-shadow: 0 0 0 2px #000, 0 2px 4px rgba(0,0,0,0.4);
+  }
+  .bd-logo .disc{
+    width:22px; height:22px; border-radius:50%;
+    background: #D42E2E;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .bd-logo .disc span{
+    color:#F4EEDD;
+    font-family: Georgia, serif;
+    font-weight:700;
+    font-size:13px;
+    transform: translateX(-0.5px);
+  }
+  .header-title{
+    flex:1; text-align:center;
+  }
+  .header-title h1{
+    margin:0;
+    font-size: 23px;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    color: var(--cream);
+    position: relative;
+    display:inline-block;
+  }
+  .header-title h1 .hi{
+    color: var(--mustard);
+    font-style: italic;
+  }
+  .header-title h1 .rest{
+    font-style: normal;
+  }
+  .header-title .rule{
+    width: 46px; height: 2px;
+    background: linear-gradient(90deg, transparent, var(--mustard), transparent);
+    margin: 5px auto 0 auto;
+  }
+  .settings-wrap{
+    position: relative;
+    flex: 0 0 auto;
+  }
+  .settings-btn{
+    width:38px; height:38px; border-radius:50%;
+    background: var(--navy-2);
+    border: 1px solid var(--line);
+    color: var(--mustard);
+    font-size: 18px;
+    display:flex; align-items:center; justify-content:center;
+    cursor:pointer;
+  }
+  .settings-menu{
+    display:none;
+    position: absolute; top: 46px; right: 0;
+    background: var(--navy-2);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    padding: 14px;
+    width: 240px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    z-index: 50;
+  }
+  .settings-menu.show{ display:block; }
+  .settings-menu h2{
+    margin:0 0 10px 0; font-size:14px; color: var(--mustard); font-weight:600;
+  }
+  .month-line{
+    text-align:center; padding: 0 16px 14px 16px;
+    color: var(--mustard);
+    font-size: 13.5px;
+    letter-spacing:0.3px;
+  }
+  .month-line .month-name{
+    font-family: Georgia, serif;
+    font-size: 15px;
+  }
+
+  main{ padding: 0 16px 24px 16px; max-width:480px; margin:0 auto; }
+
+  .card{
+    background: var(--navy-2);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    padding: 16px;
+    margin-bottom: 14px;
+  }
+  .card h2{
+    margin:0 0 12px 0;
+    font-size: 14.5px;
+    font-weight:600;
+    color: var(--mustard);
+    letter-spacing: 0.2px;
+  }
+  .row{ display:flex; gap:8px; align-items:center; }
+  .row + .row{ margin-top:8px; }
+
+  input[type=text], input[type=number], input[type=date], select{
+    background: var(--navy);
+    border: 1px solid var(--line);
+    color: var(--cream);
+    border-radius: var(--radius-sm);
+    padding: 10px 11px;
+    font-size: 14.5px;
+    width: 100%;
+    outline: none;
+  }
+  select{ appearance:none; -webkit-appearance:none; }
+  input::placeholder{ color: var(--cream-dim); }
+  input:focus, select:focus{ border-color: var(--mustard); }
+
+  button{
+    border:none; cursor:pointer;
+    border-radius: var(--radius-sm);
+    padding: 10px 16px;
+    font-size: 14px;
+    font-weight:600;
+    white-space:nowrap;
+  }
+  .btn-primary{
+    background: var(--mustard); color: var(--navy);
+  }
+  .btn-primary:active{ background: var(--mustard-dim); }
+  .btn-ghost{
+    background: transparent; color: var(--mustard);
+    border: 1px solid var(--mustard);
+  }
+  .btn-del{
+    background: transparent; color: var(--red);
+    padding: 4px 8px; font-size:12px; border:1px solid rgba(217,108,92,0.35);
+  }
+
+  .stat-row{
+    display:flex; justify-content:space-between; align-items:baseline;
+    padding: 9px 0; border-bottom: 1px solid var(--line);
+  }
+  .stat-row:last-child{ border-bottom:none; }
+  .stat-label{ font-size: 13.5px; color: var(--cream-dim); }
+  .stat-value{ font-size: 16px; font-weight:700; font-family: Georgia, serif; }
+  .stat-value.big{ font-size: 22px; color: var(--mustard); }
+  .stat-value.pos{ color: var(--green); }
+  .stat-value.neg{ color: var(--red); }
+
+  .cat-block{ margin-bottom:10px; }
+  .cat-block summary{
+    list-style:none; cursor:pointer;
+    display:flex; justify-content:space-between; align-items:center;
+    padding: 11px 12px;
+    background: var(--navy);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    font-size: 14px; font-weight:600;
+  }
+  .cat-block summary::-webkit-details-marker{ display:none; }
+  .cat-block summary .cat-total{ color: var(--mustard); font-weight:700; }
+  .cat-body{ padding: 10px 4px 2px 4px; }
+  .entry-row{
+    display:flex; justify-content:space-between; align-items:center;
+    padding:6px 4px; font-size: 13.5px; border-bottom: 1px dashed var(--line);
+    gap:8px;
+  }
+  .entry-row .desc{ flex:1; color: var(--cream); }
+  .entry-row .amt{ color: var(--mustard); font-weight:600; }
+  .entry-empty{ color: var(--cream-dim); font-size:13px; padding:6px 4px; font-style:italic; }
+
+  .day-block{ margin-bottom: 10px; }
+  .day-block summary{
+    list-style:none; cursor:pointer;
+    display:flex; justify-content:space-between; align-items:center;
+    padding: 11px 12px;
+    background: var(--navy);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    font-size: 13.5px; font-weight:700; color: var(--mustard);
+  }
+  .day-block summary::-webkit-details-marker{ display:none; }
+  .day-block summary .day-amt{ color: var(--mustard); font-weight:700; }
+  .day-cats{ font-size:13px; color:var(--cream-dim); padding: 10px 0 2px 0; }
+  .day-cats .cat-block{ margin-bottom: 8px; }
+
+  .section-summary{
+    list-style:none; cursor:pointer;
+    display:flex; justify-content:space-between; align-items:center;
+  }
+  .section-summary::-webkit-details-marker{ display:none; }
+
+  .month-wd-block{ margin-bottom: 10px; }
+  .month-wd-block summary{
+    list-style:none; cursor:pointer;
+    display:flex; justify-content:space-between; align-items:center;
+    padding: 11px 12px;
+    background: var(--navy);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    font-size: 14.5px;
+  }
+  .month-wd-block summary::-webkit-details-marker{ display:none; }
+  .month-wd-block summary .amt{ color: var(--mustard); font-weight:700; }
+  .month-wd-body{ padding: 8px 4px 2px 4px; }
+
+  .month-item{
+    display:flex; justify-content:space-between; align-items:center;
+    padding:11px 2px; border-bottom:1px solid var(--line);
+    font-size:14.5px;
+  }
+  .month-item:last-child{ border-bottom:none; }
+  .month-item .amt{ font-family:Georgia, serif; font-weight:700; color: var(--mustard); }
+
+  .empty-note{ text-align:center; color:var(--cream-dim); font-size:13.5px; padding: 18px 0; }
+
+  /* Bottom tab bar */
+  nav.tabbar{
+    position: fixed; bottom:0; left:0; right:0; z-index: 30;
+    background: var(--navy-2);
+    border-top: 1px solid var(--line);
+    display:flex;
+    padding: 6px 2px calc(6px + env(safe-area-inset-bottom)) 2px;
+  }
+  nav.tabbar button.tab{
+    flex:1; background:none; border:none; color: var(--cream-dim);
+    display:flex; flex-direction:column; align-items:center; gap:3px;
+    padding:6px 2px; font-size: 10.5px; font-weight:600; border-radius:8px;
+  }
+  nav.tabbar button.tab .ic{
+    width:20px; height:20px; display:flex; align-items:center; justify-content:center;
+    font-size:15px;
+  }
+  nav.tabbar button.tab.active{ color: var(--mustard); }
+  nav.tabbar button.tab.active .ic{ color: var(--mustard); }
+
+  .tab-panel{ display:none; }
+  .tab-panel.active{ display:block; }
+
+  .save-flash{
+    position: fixed; bottom: 86px; left:50%; transform: translateX(-50%);
+    background: var(--green); color:#0d2019; font-weight:700; font-size:13px;
+    padding: 9px 18px; border-radius: 20px; opacity:0; pointer-events:none;
+    transition: opacity 0.25s ease, transform 0.25s ease;
+    z-index: 40;
+  }
+  .save-flash.show{ opacity:1; transform: translateX(-50%) translateY(-4px); }
+
+  /* Confirm modal */
+  .modal-overlay{
+    position: fixed; inset:0; z-index: 60;
+    background: rgba(10,11,22,0.72);
+    display:none; align-items:center; justify-content:center;
+    padding: 24px;
+  }
+  .modal-overlay.show{ display:flex; }
+  .modal-box{
+    background: var(--navy-2);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    padding: 20px 18px;
+    max-width: 320px; width:100%;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  }
+  .modal-msg{
+    font-size: 14.5px; color: var(--cream); margin-bottom:18px; line-height:1.4;
+  }
+  .modal-actions{ display:flex; gap:10px; justify-content:flex-end; }
+  .btn-danger{
+    background: var(--red); color: #2A0F0A;
+  }
+  .hint-text{
+    font-size: 12px; color: var(--cream-dim); margin-top: 10px; line-height: 1.5;
+  }
+</style>
+</head>
+<body>
+
+<header class="app-header">
+  <div class="bd-logo"><div class="disc"><span>৳</span></div></div>
+  <div class="header-title">
+    <h1 class="display"><span class="hi">HiMu's</span> <span class="rest">Budget</span></h1>
+    <div class="rule"></div>
+  </div>
+  <div class="settings-wrap">
+    <button type="button" class="settings-btn" onclick="toggleSettingsMenu()">⚙</button>
+    <div class="settings-menu" id="settingsMenu">
+      <h2>Backup &amp; Restore</h2>
+      <div class="row">
+        <button class="btn-primary" onclick="exportData()" style="flex:1;">Backup / Save to Drive</button>
+      </div>
+      <div class="row" style="margin-top:8px;">
+        <input type="file" id="restoreFile" accept="application/json" style="display:none;" onchange="importData(this.files[0])">
+        <button class="btn-ghost" onclick="document.getElementById('restoreFile').click()" style="flex:1;">Restore from Backup</button>
+      </div>
+      <div class="hint-text">Tap "Backup / Save to Drive", then choose <b>Drive</b> from the share menu. To restore, pick that file from Drive first, then use "Restore from Backup".</div>
+    </div>
+  </div>
+</header>
+<div class="month-line">Month of <span class="month-name" id="monthLabelTop"></span></div>
+
+<main>
+
+  <!-- TODAY TAB -->
+  <section id="tab-today" class="tab-panel active">
+
+    <div class="card">
+      <h2>Monthly Income Amount</h2>
+      <div class="row">
+        <input type="number" id="incomeInput" placeholder="Enter income amount (৳)" inputmode="decimal" oninput="toggleSaveBtn('incomeInput','incomeSaveBtn')">
+        <button class="btn-primary" id="incomeSaveBtn" onclick="saveIncome()" style="display:none;">Save</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Monthly Savings Amount</h2>
+      <div class="row">
+        <input type="number" id="savingsInput" placeholder="Enter savings amount (৳)" inputmode="decimal" oninput="toggleSaveBtn('savingsInput','savingsSaveBtn')">
+        <button class="btn-primary" id="savingsSaveBtn" onclick="saveSavings()" style="display:none;">Save</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="stat-row">
+        <span class="stat-label">Total Income of <span id="monthLabelIncome"></span></span>
+        <span class="stat-value big" id="totalIncomeVal">৳0</span>
+      </div>
+      <div class="stat-row">
+        <span class="stat-label">Current Month Savings</span>
+        <span class="stat-value" id="todayCurMonthSavings">৳0</span>
+      </div>
+      <div class="stat-row">
+        <span class="stat-label">Current Month Total Cost</span>
+        <span class="stat-value" id="todayCurMonthCost">৳0</span>
+      </div>
+      <div class="stat-row">
+        <span class="stat-label">Current Month Remaining Amount</span>
+        <span class="stat-value" id="todayCurMonthRemaining">৳0</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Date</h2>
+      <div class="row">
+        <input type="date" id="dateInput">
+        <button class="btn-primary" onclick="saveDate()">Save</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="stat-row">
+        <span class="stat-label" id="todayTotalLabel">Today's Total</span>
+        <span class="stat-value big" id="todayTotalVal">৳0</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Expense List</h2>
+      <div id="categoryEntryList"></div>
+    </div>
+
+  </section>
+
+  <!-- SUMMARY TAB -->
+  <section id="tab-month" class="tab-panel">
+    <div class="card">
+      <details>
+        <summary class="section-summary"><h2 style="display:inline; margin:0;">Day-wise Summary — <span id="monthLabelDaywise"></span></h2></summary>
+        <div id="daywiseList" style="margin-top:12px;"></div>
+      </details>
+    </div>
+    <div class="card">
+      <details>
+        <summary class="section-summary"><h2 style="display:inline; margin:0;">Category-wise Total</h2></summary>
+        <div id="catTotalsList" style="margin-top:12px;"></div>
+      </details>
+    </div>
+    <div class="card">
+      <details>
+        <summary class="section-summary"><h2 style="display:inline; margin:0;">Month Wise Summary</h2></summary>
+        <div id="monthWiseSummaryList" style="margin-top:12px;"></div>
+      </details>
+    </div>
+  </section>
+
+  <!-- TOTAL BUDGET TAB -->
+  <section id="tab-budget" class="tab-panel">
+    <div class="card">
+      <h2>Total Budget — <span id="monthLabelBudget"></span></h2>
+      <div class="stat-row">
+        <span class="stat-label"><span class="bm-month"></span> Income</span>
+        <span class="stat-value" id="budgetIncome">৳0</span>
+      </div>
+      <div class="stat-row">
+        <span class="stat-label"><span class="bm-month"></span> Savings</span>
+        <span class="stat-value" id="budgetSavings">৳0</span>
+      </div>
+      <div class="stat-row">
+        <span class="stat-label"><span class="bm-month"></span> Total Cost</span>
+        <span class="stat-value" id="budgetCost">৳0</span>
+      </div>
+      <div class="stat-row">
+        <span class="stat-label"><span class="bm-month"></span> Remaining</span>
+        <span class="stat-value" id="budgetRemaining">৳0</span>
+      </div>
+      <div class="stat-row">
+        <span class="stat-label"><span class="bm-month"></span> Total Withdraw</span>
+        <span class="stat-value" id="budgetWithdraw">৳0</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Total History Budget</h2>
+      <div id="budgetHistoryList"></div>
+    </div>
+  </section>
+
+  <!-- TOTAL WITHDRAW TAB -->
+  <section id="tab-withdraw" class="tab-panel">
+    <div class="card">
+      <div class="stat-row">
+        <span class="stat-label">Current Month Total Withdraw</span>
+        <span class="stat-value big" id="withdrawTopTotal">৳0</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Add Withdraw</h2>
+      <div class="stat-row">
+        <span class="stat-label">Serial No.</span>
+        <span class="stat-value" id="withdrawSl">1</span>
+      </div>
+      <div class="row" style="margin-top:8px;">
+        <input type="date" id="withdrawDateInput" onchange="updateWithdrawSerialPreview()">
+      </div>
+      <div class="row" style="margin-top:10px;">
+        <input type="text" id="withdrawPurpose" placeholder="Purpose">
+      </div>
+      <div class="row">
+        <input type="number" id="withdrawAmount" placeholder="Amount (৳)" inputmode="decimal">
+      </div>
+      <div class="row">
+        <button class="btn-primary" onclick="saveWithdraw()" style="flex:1;">Save</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <details>
+        <summary class="section-summary"><h2 style="display:inline; margin:0;">Withdraw History</h2></summary>
+        <div id="withdrawList" style="margin-top:12px;"></div>
+      </details>
+    </div>
+
+    <div class="card">
+      <h2>Withdraw From Saving</h2>
+      <div class="stat-row">
+        <span class="stat-label">Total Savings Available</span>
+        <span class="stat-value" id="savingsAvailable">৳0</span>
+      </div>
+      <div class="row" style="margin-top:10px;">
+        <input type="text" id="savingsWithdrawPurpose" placeholder="Purpose">
+      </div>
+      <div class="row">
+        <input type="number" id="savingsWithdrawAmount" placeholder="Amount (৳)" inputmode="decimal">
+      </div>
+      <div class="row">
+        <button class="btn-primary" onclick="withdrawFromSavings()" style="flex:1;">Withdraw From Saving</button>
+      </div>
+      <div id="savingsWithdrawList" style="margin-top:10px;"></div>
+    </div>
+
+    <div class="card">
+      <h2>Month Wise Withdraw</h2>
+      <div id="monthWiseWithdrawList"></div>
+    </div>
+
+    <div class="card">
+      <div class="stat-row">
+        <span class="stat-label">Total All Month Withdraw</span>
+        <span class="stat-value big" id="totalAllWithdraw">৳0</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- TOTAL EXPENSE TAB -->
+  <section id="tab-expense" class="tab-panel">
+    <div class="card">
+      <h2>Month-wise Expense</h2>
+      <div id="expenseMonthList"></div>
+    </div>
+    <div class="card">
+      <div class="stat-row">
+        <span class="stat-label">Total Amount of <span id="yearLabel"></span></span>
+        <span class="stat-value big" id="yearTotalVal">৳0</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- LOAN TAB -->
+  <section id="tab-loan" class="tab-panel">
+    <div class="card">
+      <div class="stat-row">
+        <span class="stat-label">Total Loan Outstanding</span>
+        <span class="stat-value big" id="loanOutstandingVal">৳0</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Give Loan</h2>
+      <div class="row">
+        <input type="date" id="loanDateInput">
+      </div>
+      <div class="row" style="margin-top:8px;">
+        <input type="text" id="loanToInput" placeholder="Loan To (Name)">
+      </div>
+      <div class="row" style="margin-top:8px;">
+        <input type="text" id="loanPurposeInput" placeholder="Purpose">
+      </div>
+      <div class="row" style="margin-top:8px;">
+        <input type="number" id="loanAmountInput" placeholder="Amount (৳)" inputmode="decimal">
+      </div>
+      <div class="row" style="margin-top:8px;">
+        <select id="loanMethodInput">
+          <option value="Bkash">Send By Bkash</option>
+          <option value="Nagad">Send By Nagad</option>
+          <option value="Bank">Send By Bank</option>
+          <option value="Cash">Send By Cash</option>
+          <option value="Other">Send By Other</option>
+        </select>
+      </div>
+      <div class="row" style="margin-top:10px;">
+        <button class="btn-primary" onclick="saveLoan()" style="flex:1;">Save</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <details>
+        <summary class="section-summary"><h2 style="display:inline; margin:0;">Loan History</h2></summary>
+        <div id="loanHistoryList" style="margin-top:12px;"></div>
+      </details>
+    </div>
+
+    <div class="card">
+      <details>
+        <summary class="section-summary"><h2 style="display:inline; margin:0;">Name Wise Loan History</h2></summary>
+        <div id="loanByNameList" style="margin-top:12px;"></div>
+      </details>
+    </div>
+
+    <div class="card">
+      <h2>Loan Paid</h2>
+      <div class="row">
+        <input type="date" id="loanPaidDateInput">
+      </div>
+      <div class="row" style="margin-top:8px;">
+        <input type="text" id="loanPaidNoteInput" placeholder="Note (who / which loan)">
+      </div>
+      <div class="row" style="margin-top:8px;">
+        <input type="number" id="loanPaidAmountInput" placeholder="Amount Paid (৳)" inputmode="decimal">
+      </div>
+      <div class="row" style="margin-top:10px;">
+        <button class="btn-primary" onclick="saveLoanPaid()" style="flex:1;">Save</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <details>
+        <summary class="section-summary"><h2 style="display:inline; margin:0;">Loan Paid History</h2></summary>
+        <div id="loanPaidHistoryList" style="margin-top:12px;"></div>
+      </details>
+    </div>
+  </section>
+
+</main>
+
+<div class="save-flash" id="saveFlash">Saved</div>
+
+<nav class="tabbar">
+  <button class="tab active" data-tab="today" onclick="switchTab('today')">
+    <span class="ic">☀</span>Today
+  </button>
+  <button class="tab" data-tab="month" onclick="switchTab('month')">
+    <span class="ic">📅</span>Summary
+  </button>
+  <button class="tab" data-tab="budget" onclick="switchTab('budget')">
+    <span class="ic">৳</span>Total Budget
+  </button>
+  <button class="tab" data-tab="withdraw" onclick="switchTab('withdraw')">
+    <span class="ic">↧</span>Total Withdraw
+  </button>
+  <button class="tab" data-tab="expense" onclick="switchTab('expense')">
+    <span class="ic">📊</span>Total Expense
+  </button>
+  <button class="tab" data-tab="loan" onclick="switchTab('loan')">
+    <span class="ic">🤝</span>Loan
+  </button>
+</nav>
+
+<div class="modal-overlay" id="confirmOverlay">
+  <div class="modal-box">
+    <div class="modal-msg" id="confirmMsg">Remove this entry?</div>
+    <div class="modal-actions">
+      <button class="btn-ghost" id="confirmCancelBtn">Cancel</button>
+      <button class="btn-danger" id="confirmOkBtn">OK, Remove</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ============ CONFIG ============ */
+const CATEGORIES = ["Food","Transport","Grocery","Mobile","Medical","Medicine","House Rent","Utilities","Shopping"];
+const STORAGE_KEY = "himus_budget_db_v1";
+const MONTH_NAMES = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+
+/* ============ STATE / STORAGE ============ */
+let DB = loadDB();
+let selectedDate = todayISO(); // date currently being logged in Today tab
+
+function todayISO(){
+  const d = new Date();
+  return d.getFullYear()+"-"+pad(d.getMonth()+1)+"-"+pad(d.getDate());
+}
+function pad(n){ return n<10 ? "0"+n : ""+n; }
+
+function loadDB(){
+  try{
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if(raw){
+      const parsed = JSON.parse(raw);
+      if(!parsed.savingsWithdrawals) parsed.savingsWithdrawals = [];
+      if(!parsed.loans) parsed.loans = [];
+      if(!parsed.loanPayments) parsed.loanPayments = [];
+      return parsed;
+    }
+  }catch(e){ console.warn("Storage read failed", e); }
+  return { months: {}, withdrawals: {}, savingsWithdrawals: [], loans: [], loanPayments: [] };
+}
+function saveDB(){
+  try{
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(DB));
+  }catch(e){ console.warn("Storage write failed", e); }
+}
+
+function monthKeyFromDate(iso){ return iso.slice(0,7); } // "YYYY-MM"
+function monthLabelFromKey(key){
+  const [y,m] = key.split("-").map(Number);
+  return MONTH_NAMES[m-1] + " " + y;
+}
+function ensureMonth(key){
+  if(!DB.months[key]) DB.months[key] = { incomeEntries: [], savingsEntries: [], days: {} };
+  if(!DB.months[key].savingsEntries) DB.months[key].savingsEntries = [];
+  return DB.months[key];
+}
+function ensureDay(monthKey, dayIso){
+  const m = ensureMonth(monthKey);
+  if(!m.days[dayIso]){
+    const cats = {};
+    CATEGORIES.forEach(c => cats[c] = []);
+    m.days[dayIso] = cats;
+  }
+  return m.days[dayIso];
+}
+
+function currentMonthKey(){ return monthKeyFromDate(todayISO()); }
+
+function monthIncome(key){
+  const m = DB.months[key];
+  if(!m) return 0;
+  return m.incomeEntries.reduce((s,e)=>s+e.amt,0);
+}
+function monthSavings(key){
+  const m = DB.months[key];
+  if(!m || !m.savingsEntries) return 0;
+  return m.savingsEntries.reduce((s,e)=>s+e.amt,0);
+}
+function monthSavingsWithdrawn(key){
+  return (DB.savingsWithdrawals||[]).filter(e => monthKeyFromDate(e.date) === key).reduce((s,e)=>s+e.amount,0);
+}
+function monthNetSavings(key){
+  return monthSavings(key) - monthSavingsWithdrawn(key);
+}
+function totalSavingsBalance(){
+  let added = 0;
+  Object.keys(DB.months).forEach(key => added += monthSavings(key));
+  const withdrawn = (DB.savingsWithdrawals||[]).reduce((s,e)=>s+e.amount,0);
+  return added - withdrawn;
+}
+function totalLoanOutstanding(){
+  const given = (DB.loans||[]).reduce((s,e)=>s+e.amount,0);
+  const paid = (DB.loanPayments||[]).reduce((s,e)=>s+e.amount,0);
+  return given - paid;
+}
+function monthTotalCost(key){
+  const m = DB.months[key];
+  if(!m) return 0;
+  let total = 0;
+  Object.values(m.days).forEach(day=>{
+    CATEGORIES.forEach(c=>{
+      (day[c]||[]).forEach(e => total += e.amt);
+    });
+  });
+  return total;
+}
+function monthCategoryTotals(key){
+  const totals = {};
+  CATEGORIES.forEach(c=>totals[c]=0);
+  const m = DB.months[key];
+  if(!m) return totals;
+  Object.values(m.days).forEach(day=>{
+    CATEGORIES.forEach(c=>{
+      (day[c]||[]).forEach(e => totals[c] += e.amt);
+    });
+  });
+  return totals;
+}
+function monthWithdrawTotal(key){
+  const list = DB.withdrawals[key] || [];
+  return list.reduce((s,e)=>s+e.amount,0);
+}
+function dayTotal(monthKey, dayIso){
+  const m = DB.months[monthKey];
+  if(!m || !m.days[dayIso]) return 0;
+  let total = 0;
+  CATEGORIES.forEach(c => (m.days[dayIso][c]||[]).forEach(e => total += e.amt));
+  return total;
+}
+
+function fmt(n){
+  n = Math.round(n*100)/100;
+  return "৳" + n.toLocaleString('en-US');
+}
+function fmtDateNice(iso){
+  const [y,m,d] = iso.split("-").map(Number);
+  return d + " " + MONTH_NAMES[m-1] + " " + y;
+}
+
+/* ============ TABS ============ */
+function switchTab(name){
+  document.querySelectorAll(".tab-panel").forEach(p=>p.classList.remove("active"));
+  document.querySelectorAll("nav.tabbar .tab").forEach(b=>b.classList.remove("active"));
+  document.getElementById("tab-"+name).classList.add("active");
+  document.querySelector('nav.tabbar .tab[data-tab="'+name+'"]').classList.add("active");
+  renderAll();
+}
+
+function flash(msg){
+  const el = document.getElementById("saveFlash");
+  el.textContent = msg || "Saved";
+  el.classList.add("show");
+  setTimeout(()=>el.classList.remove("show"), 1100);
+}
+
+/* ============ SETTINGS MENU ============ */
+function toggleSaveBtn(inputId, btnId){
+  const input = document.getElementById(inputId);
+  const btn = document.getElementById(btnId);
+  btn.style.display = input.value.trim() ? "inline-block" : "none";
+}
+function toggleSettingsMenu(){
+  document.getElementById("settingsMenu").classList.toggle("show");
+}
+document.addEventListener("click", function(e){
+  const wrap = document.querySelector(".settings-wrap");
+  if(wrap && !wrap.contains(e.target)){
+    document.getElementById("settingsMenu").classList.remove("show");
+  }
+});
+
+/* ============ CONFIRM MODAL ============ */
+let pendingDeleteAction = null;
+function confirmDelete(message, onConfirm, okLabel){
+  pendingDeleteAction = onConfirm;
+  document.getElementById("confirmMsg").textContent = message;
+  document.getElementById("confirmOkBtn").textContent = okLabel || "OK, Remove";
+  document.getElementById("confirmOverlay").classList.add("show");
+}
+document.getElementById("confirmCancelBtn").onclick = function(){
+  pendingDeleteAction = null;
+  document.getElementById("confirmOverlay").classList.remove("show");
+};
+document.getElementById("confirmOkBtn").onclick = function(){
+  if(pendingDeleteAction) pendingDeleteAction();
+  pendingDeleteAction = null;
+  document.getElementById("confirmOverlay").classList.remove("show");
+};
+
+/* ============ TODAY TAB ACTIONS ============ */
+function saveIncome(){
+  const input = document.getElementById("incomeInput");
+  const val = parseFloat(input.value);
+  if(!val || val<=0) return;
+  confirmDelete("Do you want to save income of " + fmt(val) + "?", function(){
+    const key = currentMonthKey();
+    const m = ensureMonth(key);
+    m.incomeEntries.push({ amt: val, ts: Date.now() });
+    saveDB();
+    input.value = "";
+    document.getElementById("incomeSaveBtn").style.display = "none";
+    flash("Income saved");
+    renderAll();
+  }, "OK, Save");
+}
+
+function saveSavings(){
+  const input = document.getElementById("savingsInput");
+  const val = parseFloat(input.value);
+  if(!val || val<=0) return;
+  const key = currentMonthKey();
+  const m = ensureMonth(key);
+  m.savingsEntries.push({ amt: val, ts: Date.now() });
+  saveDB();
+  input.value = "";
+  document.getElementById("savingsSaveBtn").style.display = "none";
+  flash("Savings saved");
+  renderAll();
+}
+
+function saveDate(){
+  const input = document.getElementById("dateInput");
+  if(input.value){ selectedDate = input.value; }
+  flash("Date set");
+  renderAll();
+}
+
+function addCategoryEntry(cat){
+  const descEl = document.getElementById("desc_"+catId(cat));
+  const amtEl = document.getElementById("amt_"+catId(cat));
+  const desc = descEl.value.trim();
+  const amt = parseFloat(amtEl.value);
+  if(!amt || amt<=0) return;
+  const words = desc.split(/\s+/).filter(Boolean);
+  const finalDesc = words.slice(0,10).join(" ") || cat;
+  const monthKey = monthKeyFromDate(selectedDate);
+  const day = ensureDay(monthKey, selectedDate);
+  day[cat].push({ desc: finalDesc, amt: amt });
+  saveDB();
+  descEl.value = "";
+  amtEl.value = "";
+  flash(cat + " added");
+  renderAll();
+}
+
+function deleteCategoryEntry(cat, idx){
+  confirmDelete("Remove this " + cat + " entry?", function(){
+    const monthKey = monthKeyFromDate(selectedDate);
+    const day = ensureDay(monthKey, selectedDate);
+    day[cat].splice(idx,1);
+    saveDB();
+    flash("Removed");
+    renderAll();
+  });
+}
+
+function catId(cat){ return cat.replace(/\s+/g,'_'); }
+
+/* ============ WITHDRAW TAB ACTIONS ============ */
+function saveWithdraw(){
+  const purposeEl = document.getElementById("withdrawPurpose");
+  const amountEl = document.getElementById("withdrawAmount");
+  const dateEl = document.getElementById("withdrawDateInput");
+  const purpose = purposeEl.value.trim();
+  const amount = parseFloat(amountEl.value);
+  if(!amount || amount<=0) return;
+  const dateVal = dateEl.value || todayISO();
+  const key = monthKeyFromDate(dateVal);
+  if(!DB.withdrawals[key]) DB.withdrawals[key] = [];
+  const sl = DB.withdrawals[key].length + 1;
+  DB.withdrawals[key].push({
+    sl: sl,
+    date: dateVal,
+    purpose: purpose || "—",
+    amount: amount
+  });
+  saveDB();
+  purposeEl.value = "";
+  amountEl.value = "";
+  flash("Withdraw saved");
+  renderAll();
+}
+
+function deleteWithdraw(key, idx){
+  const entry = DB.withdrawals[key][idx];
+  confirmDelete("Remove withdraw entry #" + entry.sl + " (" + fmt(entry.amount) + ")?", function(){
+    DB.withdrawals[key].splice(idx,1);
+    DB.withdrawals[key].forEach((e,i)=> e.sl = i+1);
+    saveDB();
+    flash("Removed");
+    renderAll();
+  });
+}
+
+function withdrawFromSavings(){
+  const purposeEl = document.getElementById("savingsWithdrawPurpose");
+  const amountEl = document.getElementById("savingsWithdrawAmount");
+  const purpose = purposeEl.value.trim();
+  const amount = parseFloat(amountEl.value);
+  if(!amount || amount<=0) return;
+  const available = totalSavingsBalance();
+  confirmDelete("Withdraw " + fmt(amount) + " from savings for \"" + (purpose || "—") + "\"? Available: " + fmt(available), function(){
+    if(!DB.savingsWithdrawals) DB.savingsWithdrawals = [];
+    DB.savingsWithdrawals.push({
+      date: todayISO(),
+      purpose: purpose || "—",
+      amount: amount
+    });
+    saveDB();
+    purposeEl.value = "";
+    amountEl.value = "";
+    flash("Withdrawn from savings");
+    renderAll();
+  }, "OK, Withdraw");
+}
+
+function deleteSavingsWithdraw(idx){
+  const entry = DB.savingsWithdrawals[idx];
+  confirmDelete("Remove this savings withdrawal of " + fmt(entry.amount) + "?", function(){
+    DB.savingsWithdrawals.splice(idx,1);
+    saveDB();
+    flash("Removed — savings adjusted");
+    renderAll();
+  });
+}
+
+/* ============ RENDER ============ */
+function renderAll(){
+  const todayIso = todayISO();
+  const curMonthKey = currentMonthKey();
+  const curMonthLabel = monthLabelFromKey(curMonthKey);
+
+  document.getElementById("monthLabelTop").textContent = curMonthLabel;
+  document.getElementById("monthLabelIncome").textContent = curMonthLabel;
+  document.getElementById("monthLabelDaywise").textContent = curMonthLabel;
+  document.getElementById("monthLabelBudget").textContent = curMonthLabel;
+  document.querySelectorAll(".bm-month").forEach(el => el.textContent = curMonthLabel);
+
+  // Today tab
+  document.getElementById("totalIncomeVal").textContent = fmt(monthIncome(curMonthKey));
+  const curCostForToday = monthTotalCost(curMonthKey);
+  const curIncomeForToday = monthIncome(curMonthKey);
+  const curSavingsForToday = monthNetSavings(curMonthKey);
+  document.getElementById("todayCurMonthSavings").textContent = fmt(curSavingsForToday);
+  document.getElementById("todayCurMonthCost").textContent = fmt(curCostForToday);
+  const remainForToday = curIncomeForToday - curCostForToday - curSavingsForToday;
+  const remainForTodayEl = document.getElementById("todayCurMonthRemaining");
+  remainForTodayEl.textContent = fmt(remainForToday);
+  remainForTodayEl.className = "stat-value " + (remainForToday>=0 ? "pos" : "neg");
+  const dateInput = document.getElementById("dateInput");
+  if(!dateInput.value) dateInput.value = selectedDate;
+
+  const isToday = selectedDate === todayIso;
+  document.getElementById("todayTotalLabel").textContent = isToday
+    ? "Today's Total (" + fmtDateNice(selectedDate) + ")"
+    : "Total for " + fmtDateNice(selectedDate);
+  const selMonthKey = monthKeyFromDate(selectedDate);
+  document.getElementById("todayTotalVal").textContent = fmt(dayTotal(selMonthKey, selectedDate));
+
+  renderCategoryEntryList();
+
+  // Summary tab
+  renderDaywise(curMonthKey);
+  renderCategoryTotals(curMonthKey);
+  renderMonthWiseSummary();
+
+  // Total Budget tab
+  const inc = monthIncome(curMonthKey);
+  const cost = monthTotalCost(curMonthKey);
+  const savings = monthNetSavings(curMonthKey);
+  const wd = monthWithdrawTotal(curMonthKey);
+  document.getElementById("budgetIncome").textContent = fmt(inc);
+  document.getElementById("budgetSavings").textContent = fmt(savings);
+  document.getElementById("budgetCost").textContent = fmt(cost);
+  const remainEl = document.getElementById("budgetRemaining");
+  const remaining = inc - cost - savings;
+  remainEl.textContent = fmt(remaining);
+  remainEl.className = "stat-value " + (remaining>=0 ? "pos" : "neg");
+  document.getElementById("budgetWithdraw").textContent = fmt(wd);
+  renderBudgetHistory();
+
+  // Withdraw tab
+  document.getElementById("withdrawTopTotal").textContent = fmt(wd);
+  const wdDateInput = document.getElementById("withdrawDateInput");
+  if(!wdDateInput.value) wdDateInput.value = todayIso;
+  updateWithdrawSerialPreview();
+  renderWithdrawList(curMonthKey);
+  document.getElementById("savingsAvailable").textContent = fmt(totalSavingsBalance());
+  renderSavingsWithdrawList();
+  renderMonthWiseWithdraw();
+  let allWithdrawTotal = 0;
+  Object.keys(DB.withdrawals).forEach(k => allWithdrawTotal += monthWithdrawTotal(k));
+  document.getElementById("totalAllWithdraw").textContent = fmt(allWithdrawTotal);
+
+  // Total Expense tab
+  renderExpenseMonths();
+
+  // Loan tab
+  const loanDateInput = document.getElementById("loanDateInput");
+  if(!loanDateInput.value) loanDateInput.value = todayIso;
+  const loanPaidDateInput = document.getElementById("loanPaidDateInput");
+  if(!loanPaidDateInput.value) loanPaidDateInput.value = todayIso;
+  document.getElementById("loanOutstandingVal").textContent = fmt(totalLoanOutstanding());
+  renderLoanHistory();
+  renderLoanByName();
+  renderLoanPaidHistory();
+}
+
+function updateWithdrawSerialPreview(){
+  const wdDateInput = document.getElementById("withdrawDateInput");
+  const dateVal = wdDateInput.value || todayISO();
+  const key = monthKeyFromDate(dateVal);
+  const nextSl = ((DB.withdrawals[key]||[]).length) + 1;
+  document.getElementById("withdrawSl").textContent = nextSl;
+}
+
+function renderCategoryEntryList(){
+  const container = document.getElementById("categoryEntryList");
+  const monthKey = monthKeyFromDate(selectedDate);
+  const day = (DB.months[monthKey] && DB.months[monthKey].days[selectedDate]) || {};
+  container.innerHTML = "";
+  CATEGORIES.forEach(cat=>{
+    const entries = day[cat] || [];
+    const subtotal = entries.reduce((s,e)=>s+e.amt,0);
+    const det = document.createElement("details");
+    det.className = "cat-block";
+    const idc = catId(cat);
+    det.innerHTML = `
+      <summary>
+        <span>${cat}</span>
+        <span class="cat-total">${entries.length ? fmt(subtotal) : ""}</span>
+      </summary>
+      <div class="cat-body">
+        <div class="row">
+          <input type="text" id="desc_${idc}" placeholder="Description (max 10 words)">
+        </div>
+        <div class="row">
+          <input type="number" id="amt_${idc}" placeholder="Amount (৳)" inputmode="decimal">
+          <button class="btn-primary" onclick="addCategoryEntry('${cat.replace(/'/g,"\\'")}')">Add</button>
+        </div>
+        <div id="list_${idc}" style="margin-top:8px;"></div>
+      </div>
+    `;
+    container.appendChild(det);
+    const listEl = det.querySelector("#list_"+idc);
+    if(entries.length === 0){
+      listEl.innerHTML = '<div class="entry-empty">No entries yet</div>';
+    } else {
+      entries.forEach((e,idx)=>{
+        const row = document.createElement("div");
+        row.className = "entry-row";
+        row.innerHTML = `<span class="desc">${escapeHtml(e.desc)}</span><span class="amt">${fmt(e.amt)}</span>`;
+        const delBtn = document.createElement("button");
+        delBtn.className = "btn-del";
+        delBtn.textContent = "✕";
+        delBtn.onclick = ()=>deleteCategoryEntry(cat, idx);
+        row.appendChild(delBtn);
+        listEl.appendChild(row);
+      });
+    }
+  });
+}
+
+function renderDaywise(monthKey){
+  const container = document.getElementById("daywiseList");
+  const m = DB.months[monthKey];
+  container.innerHTML = "";
+  if(!m || Object.keys(m.days).length === 0){
+    container.innerHTML = '<div class="empty-note">No data yet this month</div>';
+    return;
+  }
+  const days = Object.keys(m.days).sort().reverse();
+  let any = false;
+  days.forEach(dayIso=>{
+    const day = m.days[dayIso];
+    const total = CATEGORIES.reduce((s,c)=> s + (day[c]||[]).reduce((s2,e)=>s2+e.amt,0), 0);
+    if(total === 0) return;
+    any = true;
+    let catsHtml = "";
+    CATEGORIES.forEach(c=>{
+      const entries = day[c] || [];
+      const sub = entries.reduce((s,e)=>s+e.amt,0);
+      if(sub<=0) return;
+      let rows = "";
+      entries.forEach(e=>{
+        rows += `<div class="entry-row"><span class="desc">${escapeHtml(e.desc)}</span><span class="amt">${fmt(e.amt)}</span></div>`;
+      });
+      catsHtml += `
+        <details class="cat-block">
+          <summary><span>${c}</span><span class="cat-total">${fmt(sub)}</span></summary>
+          <div class="cat-body">${rows}</div>
+        </details>
+      `;
+    });
+    const det = document.createElement("details");
+    det.className = "day-block";
+    det.innerHTML = `
+      <summary><span>${fmtDateNice(dayIso)}</span><span class="day-amt">${fmt(total)}</span></summary>
+      <div class="day-cats">${catsHtml}</div>
+    `;
+    container.appendChild(det);
+  });
+  if(!any) container.innerHTML = '<div class="empty-note">No data yet this month</div>';
+}
+
+function renderCategoryTotals(monthKey){
+  const container = document.getElementById("catTotalsList");
+  const m = DB.months[monthKey];
+  container.innerHTML = "";
+  let any = false;
+  CATEGORIES.forEach(cat=>{
+    // gather every entry for this category across every day of the month
+    const entries = [];
+    if(m){
+      Object.keys(m.days).sort().reverse().forEach(dayIso=>{
+        (m.days[dayIso][cat] || []).forEach(e=>{
+          entries.push({ date: dayIso, desc: e.desc, amt: e.amt });
+        });
+      });
+    }
+    const total = entries.reduce((s,e)=>s+e.amt,0);
+    if(total <= 0) return;
+    any = true;
+    const det = document.createElement("details");
+    det.className = "cat-block";
+    let rows = "";
+    entries.forEach(e=>{
+      rows += `<div class="entry-row"><span class="desc">${fmtDateNice(e.date)} — ${escapeHtml(e.desc)}</span><span class="amt">${fmt(e.amt)}</span></div>`;
+    });
+    det.innerHTML = `
+      <summary><span>${cat}</span><span class="cat-total">${fmt(total)}</span></summary>
+      <div class="cat-body">${rows}</div>
+    `;
+    container.appendChild(det);
+  });
+  if(!any) container.innerHTML = '<div class="empty-note">No expenses yet this month</div>';
+}
+
+function renderWithdrawList(monthKey){
+  const container = document.getElementById("withdrawList");
+  const list = DB.withdrawals[monthKey] || [];
+  container.innerHTML = "";
+  if(list.length === 0){
+    container.innerHTML = '<div class="empty-note">No withdrawals yet this month</div>';
+    return;
+  }
+  list.slice().reverse().forEach((e)=>{
+    const realIdx = list.indexOf(e);
+    const row = document.createElement("div");
+    row.className = "month-item";
+    row.innerHTML = `
+      <span>#${e.sl} · ${fmtDateNice(e.date)}<br><span style="color:var(--cream-dim); font-size:12.5px;">${escapeHtml(e.purpose)}</span></span>
+      <span class="amt">${fmt(e.amount)}</span>
+    `;
+    const delBtn = document.createElement("button");
+    delBtn.className = "btn-del";
+    delBtn.textContent = "✕";
+    delBtn.style.marginLeft = "8px";
+    delBtn.onclick = ()=>deleteWithdraw(monthKey, realIdx);
+    row.appendChild(delBtn);
+    container.appendChild(row);
+  });
+}
+
+function renderSavingsWithdrawList(){
+  const container = document.getElementById("savingsWithdrawList");
+  const list = DB.savingsWithdrawals || [];
+  container.innerHTML = "";
+  if(list.length === 0) return;
+  const det = document.createElement("details");
+  det.className = "month-wd-block";
+  const total = list.reduce((s,e)=>s+e.amount,0);
+  const summary = document.createElement("summary");
+  summary.innerHTML = `<span>Savings Withdrawal History</span><span class="amt">${fmt(total)}</span>`;
+  det.appendChild(summary);
+  const body = document.createElement("div");
+  body.className = "month-wd-body";
+  list.slice().reverse().forEach(e=>{
+    const realIdx = list.indexOf(e);
+    const row = document.createElement("div");
+    row.className = "month-item";
+    row.innerHTML = `<span>${fmtDateNice(e.date)}<br><span style="color:var(--cream-dim); font-size:12.5px;">${escapeHtml(e.purpose)}</span></span><span class="amt">${fmt(e.amount)}</span>`;
+    const delBtn = document.createElement("button");
+    delBtn.className = "btn-del";
+    delBtn.textContent = "✕";
+    delBtn.style.marginLeft = "8px";
+    delBtn.onclick = ()=>deleteSavingsWithdraw(realIdx);
+    row.appendChild(delBtn);
+    body.appendChild(row);
+  });
+  det.appendChild(body);
+  container.appendChild(det);
+}
+
+function renderMonthWiseSummary(){
+  const container = document.getElementById("monthWiseSummaryList");
+  const keys = Object.keys(DB.months).sort().reverse();
+  container.innerHTML = "";
+  let any = false;
+  keys.forEach(key=>{
+    const cost = monthTotalCost(key);
+    if(cost === 0) return;
+    any = true;
+    const m = DB.months[key];
+    let rows = "";
+    CATEGORIES.forEach(cat=>{
+      const entries = [];
+      Object.keys(m.days).sort().reverse().forEach(dayIso=>{
+        (m.days[dayIso][cat] || []).forEach(e=>{
+          entries.push({ date: dayIso, desc: e.desc, amt: e.amt });
+        });
+      });
+      const subtotal = entries.reduce((s,e)=>s+e.amt,0);
+      if(subtotal <= 0) return;
+      let entryRows = "";
+      entries.forEach(e=>{
+        entryRows += `<div class="entry-row"><span class="desc">${fmtDateNice(e.date)} — ${escapeHtml(e.desc)}</span><span class="amt">${fmt(e.amt)}</span></div>`;
+      });
+      rows += `
+        <details class="cat-block">
+          <summary><span>${cat}</span><span class="cat-total">${fmt(subtotal)}</span></summary>
+          <div class="cat-body">${entryRows}</div>
+        </details>
+      `;
+    });
+    const det = document.createElement("details");
+    det.className = "month-wd-block";
+    det.innerHTML = `<summary><span>${monthLabelFromKey(key)}</span><span class="amt">${fmt(cost)}</span></summary><div class="month-wd-body">${rows}</div>`;
+    container.appendChild(det);
+  });
+  if(!any) container.innerHTML = '<div class="empty-note">No expense history yet</div>';
+}
+
+function renderBudgetHistory(){
+  const container = document.getElementById("budgetHistoryList");
+  const keys = Object.keys(DB.months).sort().reverse();
+  container.innerHTML = "";
+  let any = false;
+  keys.forEach(key=>{
+    const inc = monthIncome(key);
+    const cost = monthTotalCost(key);
+    const savings = monthNetSavings(key);
+    const wd = monthWithdrawTotal(key);
+    if(inc === 0 && cost === 0 && savings === 0 && wd === 0) return;
+    any = true;
+    const remaining = inc - cost - savings;
+    const label = monthLabelFromKey(key);
+    const det = document.createElement("details");
+    det.className = "month-wd-block";
+    det.innerHTML = `
+      <summary><span>${label}</span><span class="amt">${fmt(cost)}</span></summary>
+      <div class="month-wd-body">
+        <div class="stat-row"><span class="stat-label">${label} Income</span><span class="stat-value">${fmt(inc)}</span></div>
+        <div class="stat-row"><span class="stat-label">${label} Savings</span><span class="stat-value">${fmt(savings)}</span></div>
+        <div class="stat-row"><span class="stat-label">${label} Total Cost</span><span class="stat-value">${fmt(cost)}</span></div>
+        <div class="stat-row"><span class="stat-label">${label} Remaining</span><span class="stat-value ${remaining>=0?'pos':'neg'}">${fmt(remaining)}</span></div>
+        <div class="stat-row"><span class="stat-label">${label} Total Withdraw</span><span class="stat-value">${fmt(wd)}</span></div>
+      </div>
+    `;
+    container.appendChild(det);
+  });
+  if(!any) container.innerHTML = '<div class="empty-note">No budget history yet</div>';
+}
+
+function renderMonthWiseWithdraw(){
+  const container = document.getElementById("monthWiseWithdrawList");
+  const keys = Object.keys(DB.withdrawals).sort().reverse();
+  container.innerHTML = "";
+  let any = false;
+  keys.forEach(key=>{
+    const list = DB.withdrawals[key];
+    if(!list || list.length === 0) return;
+    any = true;
+    const total = list.reduce((s,e)=>s+e.amount,0);
+    let rows = "";
+    list.forEach(e=>{
+      rows += `<div class="month-item"><span>#${e.sl} · ${fmtDateNice(e.date)}<br><span style="color:var(--cream-dim); font-size:12.5px;">${escapeHtml(e.purpose)}</span></span><span class="amt">${fmt(e.amount)}</span></div>`;
+    });
+    const det = document.createElement("details");
+    det.className = "month-wd-block";
+    det.innerHTML = `<summary><span>${monthLabelFromKey(key)}</span><span class="amt">${fmt(total)}</span></summary><div class="month-wd-body">${rows}</div>`;
+    container.appendChild(det);
+  });
+  if(!any) container.innerHTML = '<div class="empty-note">No withdrawals recorded yet</div>';
+}
+
+function saveLoan(){
+  const dateEl = document.getElementById("loanDateInput");
+  const toEl = document.getElementById("loanToInput");
+  const purposeEl = document.getElementById("loanPurposeInput");
+  const amountEl = document.getElementById("loanAmountInput");
+  const methodEl = document.getElementById("loanMethodInput");
+  const amount = parseFloat(amountEl.value);
+  if(!amount || amount<=0) return;
+  const dateVal = dateEl.value || todayISO();
+  if(!DB.loans) DB.loans = [];
+  DB.loans.push({
+    date: dateVal,
+    to: toEl.value.trim() || "—",
+    purpose: purposeEl.value.trim() || "—",
+    amount: amount,
+    method: methodEl.value
+  });
+  saveDB();
+  toEl.value = "";
+  purposeEl.value = "";
+  amountEl.value = "";
+  flash("Loan saved");
+  renderAll();
+}
+
+function deleteLoan(idx){
+  const entry = DB.loans[idx];
+  confirmDelete("Remove this loan of " + fmt(entry.amount) + " (" + entry.method + ")?", function(){
+    DB.loans.splice(idx,1);
+    saveDB();
+    flash("Removed");
+    renderAll();
+  });
+}
+
+function saveLoanPaid(){
+  const dateEl = document.getElementById("loanPaidDateInput");
+  const noteEl = document.getElementById("loanPaidNoteInput");
+  const amountEl = document.getElementById("loanPaidAmountInput");
+  const amount = parseFloat(amountEl.value);
+  if(!amount || amount<=0) return;
+  const dateVal = dateEl.value || todayISO();
+  if(!DB.loanPayments) DB.loanPayments = [];
+  DB.loanPayments.push({
+    date: dateVal,
+    note: noteEl.value.trim() || "—",
+    amount: amount
+  });
+  saveDB();
+  noteEl.value = "";
+  amountEl.value = "";
+  flash("Loan payment saved");
+  renderAll();
+}
+
+function deleteLoanPaid(idx){
+  const entry = DB.loanPayments[idx];
+  confirmDelete("Remove this loan payment of " + fmt(entry.amount) + "?", function(){
+    DB.loanPayments.splice(idx,1);
+    saveDB();
+    flash("Removed");
+    renderAll();
+  });
+}
+
+function renderLoanHistory(){
+  const container = document.getElementById("loanHistoryList");
+  const list = DB.loans || [];
+  container.innerHTML = "";
+  if(list.length === 0){
+    container.innerHTML = '<div class="empty-note">No loans given yet</div>';
+    return;
+  }
+  // group by month
+  const byMonth = {};
+  list.forEach((e, idx) => {
+    const key = monthKeyFromDate(e.date);
+    if(!byMonth[key]) byMonth[key] = [];
+    byMonth[key].push(idx);
+  });
+  const keys = Object.keys(byMonth).sort().reverse();
+  keys.forEach(key=>{
+    const idxs = byMonth[key];
+    const total = idxs.reduce((s,i)=>s+list[i].amount,0);
+    const det = document.createElement("details");
+    det.className = "month-wd-block";
+    const summary = document.createElement("summary");
+    summary.innerHTML = `<span>${monthLabelFromKey(key)}</span><span class="amt">${fmt(total)}</span>`;
+    det.appendChild(summary);
+    const body = document.createElement("div");
+    body.className = "month-wd-body";
+    idxs.slice().reverse().forEach(realIdx=>{
+      const e = list[realIdx];
+      const row = document.createElement("div");
+      row.className = "month-item";
+      row.innerHTML = `<span>${fmtDateNice(e.date)} · ${e.method}<br><span style="color:var(--mustard); font-size:12.5px;">To: ${escapeHtml(e.to || "—")}</span><br><span style="color:var(--cream-dim); font-size:12.5px;">${escapeHtml(e.purpose)}</span></span><span class="amt">${fmt(e.amount)}</span>`;
+      const delBtn = document.createElement("button");
+      delBtn.className = "btn-del";
+      delBtn.textContent = "✕";
+      delBtn.style.marginLeft = "8px";
+      delBtn.onclick = ()=>deleteLoan(realIdx);
+      row.appendChild(delBtn);
+      body.appendChild(row);
+    });
+    det.appendChild(body);
+    container.appendChild(det);
+  });
+}
+
+function renderLoanByName(){
+  const container = document.getElementById("loanByNameList");
+  const list = DB.loans || [];
+  container.innerHTML = "";
+  if(list.length === 0){
+    container.innerHTML = '<div class="empty-note">No loans given yet</div>';
+    return;
+  }
+  // group by name (Loan To)
+  const byName = {};
+  list.forEach((e, idx) => {
+    const name = e.to || "—";
+    if(!byName[name]) byName[name] = [];
+    byName[name].push(idx);
+  });
+  const names = Object.keys(byName).sort((a,b)=> a.localeCompare(b));
+  names.forEach(name=>{
+    const idxs = byName[name];
+    const total = idxs.reduce((s,i)=>s+list[i].amount,0);
+    const det = document.createElement("details");
+    det.className = "month-wd-block";
+    const summary = document.createElement("summary");
+    summary.innerHTML = `<span>${escapeHtml(name)}</span><span class="amt">${fmt(total)}</span>`;
+    det.appendChild(summary);
+    const body = document.createElement("div");
+    body.className = "month-wd-body";
+    idxs.slice().sort((a,b)=> (list[b].date).localeCompare(list[a].date)).forEach(realIdx=>{
+      const e = list[realIdx];
+      const row = document.createElement("div");
+      row.className = "month-item";
+      row.innerHTML = `<span>${fmtDateNice(e.date)} · ${e.method}<br><span style="color:var(--cream-dim); font-size:12.5px;">${escapeHtml(e.purpose)}</span></span><span class="amt">${fmt(e.amount)}</span>`;
+      const delBtn = document.createElement("button");
+      delBtn.className = "btn-del";
+      delBtn.textContent = "✕";
+      delBtn.style.marginLeft = "8px";
+      delBtn.onclick = ()=>deleteLoan(realIdx);
+      row.appendChild(delBtn);
+      body.appendChild(row);
+    });
+    det.appendChild(body);
+    container.appendChild(det);
+  });
+}
+
+function renderLoanPaidHistory(){
+  const container = document.getElementById("loanPaidHistoryList");
+  const list = DB.loanPayments || [];
+  container.innerHTML = "";
+  if(list.length === 0){
+    container.innerHTML = '<div class="empty-note">No loan payments recorded yet</div>';
+    return;
+  }
+  // group by month
+  const byMonth = {};
+  list.forEach((e, idx) => {
+    const key = monthKeyFromDate(e.date);
+    if(!byMonth[key]) byMonth[key] = [];
+    byMonth[key].push(idx);
+  });
+  const keys = Object.keys(byMonth).sort().reverse();
+  keys.forEach(key=>{
+    const idxs = byMonth[key];
+    const total = idxs.reduce((s,i)=>s+list[i].amount,0);
+    const det = document.createElement("details");
+    det.className = "month-wd-block";
+    const summary = document.createElement("summary");
+    summary.innerHTML = `<span>${monthLabelFromKey(key)}</span><span class="amt">${fmt(total)}</span>`;
+    det.appendChild(summary);
+    const body = document.createElement("div");
+    body.className = "month-wd-body";
+    idxs.slice().reverse().forEach(realIdx=>{
+      const e = list[realIdx];
+      const row = document.createElement("div");
+      row.className = "month-item";
+      row.innerHTML = `<span>${fmtDateNice(e.date)}<br><span style="color:var(--cream-dim); font-size:12.5px;">${escapeHtml(e.note)}</span></span><span class="amt">${fmt(e.amount)}</span>`;
+      const delBtn = document.createElement("button");
+      delBtn.className = "btn-del";
+      delBtn.textContent = "✕";
+      delBtn.style.marginLeft = "8px";
+      delBtn.onclick = ()=>deleteLoanPaid(realIdx);
+      row.appendChild(delBtn);
+      body.appendChild(row);
+    });
+    det.appendChild(body);
+    container.appendChild(det);
+  });
+}
+
+function renderExpenseMonths(){
+  const container = document.getElementById("expenseMonthList");
+  const keys = Object.keys(DB.months).sort();
+  container.innerHTML = "";
+  if(keys.length === 0){
+    container.innerHTML = '<div class="empty-note">No expense history yet</div>';
+  } else {
+    keys.forEach(key=>{
+      const cost = monthTotalCost(key);
+      if(cost === 0) return;
+      const row = document.createElement("div");
+      row.className = "month-item";
+      row.innerHTML = `<span>${monthLabelFromKey(key)} Expense</span><span class="amt">${fmt(cost)} /-</span>`;
+      container.appendChild(row);
+    });
+  }
+  const year = new Date().getFullYear();
+  document.getElementById("yearLabel").textContent = year;
+  let yearTotal = 0;
+  keys.forEach(key=>{
+    if(key.startsWith(""+year)) yearTotal += monthTotalCost(key);
+  });
+  document.getElementById("yearTotalVal").textContent = fmt(yearTotal);
+}
+
+function escapeHtml(str){
+  const div = document.createElement("div");
+  div.textContent = str;
+  return div.innerHTML;
+}
+
+/* ============ BACKUP / RESTORE ============ */
+async function exportData(){
+  const stamp = todayISO();
+  const filename = "himus-budget-backup-" + stamp + ".json";
+  const jsonStr = JSON.stringify(DB, null, 2);
+  const blob = new Blob([jsonStr], {type:"application/json"});
+  const file = new File([blob], filename, {type:"application/json"});
+
+  // Try native share sheet first (lets user pick "Drive" directly on Android)
+  if(navigator.canShare && navigator.canShare({files:[file]})){
+    try{
+      await navigator.share({
+        files: [file],
+        title: "Himu's Budget Backup",
+        text: "Backup from " + stamp
+      });
+      flash("Choose Drive to save it there");
+      return;
+    }catch(err){
+      // user cancelled the share sheet — fall through to plain download
+      if(err && err.name === "AbortError") return;
+    }
+  }
+
+  // Fallback: plain download to phone storage
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+  flash("Backup downloaded — upload it to Drive manually");
+}
+
+function importData(file){
+  if(!file) return;
+  const reader = new FileReader();
+  reader.onload = function(e){
+    try{
+      const parsed = JSON.parse(e.target.result);
+      if(!parsed.months || !parsed.withdrawals) throw new Error("Invalid backup file");
+      confirmDelete("Restore this backup? It will replace all current data on this device.", function(){
+        DB = parsed;
+        saveDB();
+        flash("Backup restored");
+        renderAll();
+      });
+    }catch(err){
+      alert("This file doesn't look like a valid Himu's Budget backup.");
+    }
+  };
+  reader.readAsText(file);
+  document.getElementById("restoreFile").value = "";
+}
+
+/* ============ INIT ============ */
+document.getElementById("dateInput").value = selectedDate;
+renderAll();
+
+/* Re-check date rollover if app stays open across midnight */
+setInterval(()=>{
+  const t = todayISO();
+  if(t !== window.__lastKnownToday){
+    window.__lastKnownToday = t;
+    renderAll();
+  }
+}, 60000);
+window.__lastKnownToday = todayISO();
+
+// Register a service worker for real "Install App" support when this file is
+// hosted online over https (service workers cannot run on file:// or plain
+// local files — this simply does nothing in that case, without any error).
+if("serviceWorker" in navigator && location.protocol.startsWith("http")){
+  const swCode = `
+    self.addEventListener("install", e => self.skipWaiting());
+    self.addEventListener("activate", e => self.clients.claim());
+    self.addEventListener("fetch", e => {
+      e.respondWith(fetch(e.request).catch(() => caches.match(e.request)));
+    });
+  `;
+  const swBlob = new Blob([swCode], {type:"application/javascript"});
+  const swUrl = URL.createObjectURL(swBlob);
+  navigator.serviceWorker.register(swUrl).catch(()=>{ /* ignore */ });
+}
+</script>
+
+</body>
+</html>
