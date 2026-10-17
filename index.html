@@ -111,7 +111,8 @@
     border: 1px solid var(--line);
     border-radius: var(--radius-md);
     padding: 14px;
-    width: 240px;
+    width: min(300px, calc(100vw - 32px));
+    max-height: 78vh; overflow-y: auto;
     box-shadow: 0 10px 30px rgba(0,0,0,0.5);
     z-index: 50;
   }
@@ -119,6 +120,16 @@
   .settings-menu h2{
     margin:0 0 10px 0; font-size:14px; color: var(--mustard); font-weight:600;
   }
+  .settings-menu .divider{ border-top:1px solid var(--line); margin:16px 0 14px 0; }
+  .export-opts label{
+    display:flex; align-items:center; gap:10px;
+    font-size:13px; color: var(--cream); padding:6px 0; cursor:pointer;
+  }
+  .export-opts input[type=checkbox]{
+    width:18px; height:18px; accent-color: var(--mustard); flex:0 0 auto;
+  }
+  .export-links{ display:flex; gap:14px; margin:4px 0 10px 0; font-size:12.5px; }
+  .export-links span{ color: var(--mustard); text-decoration:underline; cursor:pointer; }
   .month-line{
     text-align:center; padding: 0 16px 14px 16px;
     color: var(--mustard);
@@ -342,6 +353,28 @@
         <button class="btn-ghost" onclick="document.getElementById('restoreFile').click()" style="flex:1;">Restore from Backup</button>
       </div>
       <div class="hint-text">Tap "Backup / Save to Drive", then choose <b>Drive</b> from the share menu. To restore, pick that file from Drive first, then use "Restore from Backup".</div>
+
+      <div class="divider"></div>
+      <h2>Export to Excel</h2>
+      <div class="export-links">
+        <span onclick="setAllExportChecks(true)">Select all</span>
+        <span onclick="setAllExportChecks(false)">Clear</span>
+      </div>
+      <div class="export-opts">
+        <label><input type="checkbox" id="exp_expenses" checked> Expense entries (day-wise, with custom)</label>
+        <label><input type="checkbox" id="exp_catsummary" checked> Category totals by month</label>
+        <label><input type="checkbox" id="exp_budget" checked> Monthly budget (income, savings, cost)</label>
+        <label><input type="checkbox" id="exp_withdraw" checked> Withdrawals</label>
+        <label><input type="checkbox" id="exp_savwd" checked> Savings withdrawals</label>
+        <label><input type="checkbox" id="exp_loans" checked> Loans given</label>
+        <label><input type="checkbox" id="exp_loanpaid" checked> Loan payments</label>
+      </div>
+      <div class="row" style="margin-top:10px;">
+        <select id="exportMonthSel"><option value="ALL">All months</option></select>
+      </div>
+      <div class="row" style="margin-top:10px;">
+        <button class="btn-primary" onclick="exportExcel()" style="flex:1;">Export to Excel</button>
+      </div>
     </div>
   </div>
 </header>
@@ -656,7 +689,11 @@
 
 <script>
 /* ============ CONFIG ============ */
-const CATEGORIES = ["Food","Transport","Grocery","Mobile","Medical","Medicine","House Rent","Utilities","Shopping"];
+const CATEGORIES = ["Food","Transport","Grocery","Mobile","Medical","Medicine","House Rent","Utilities","Shopping","Custom"];
+const CAT_DISPLAY = { "Custom": "Custom (Write Your Own)" };
+function catLabel(c){ return CAT_DISPLAY[c] || c; }
+// text shown for one saved entry; custom entries carry their own typed title
+function entryText(e){ return e.label ? (e.label + (e.desc && e.desc !== e.label ? " — " + e.desc : "")) : e.desc; }
 const STORAGE_KEY = "himus_budget_db_v1";
 const MONTH_NAMES = ["January","February","March","April","May","June","July","August","September","October","November","December"];
 
@@ -805,7 +842,9 @@ function toggleSaveBtn(inputId, btnId){
   btn.style.display = input.value.trim() ? "inline-block" : "none";
 }
 function toggleSettingsMenu(){
-  document.getElementById("settingsMenu").classList.toggle("show");
+  const menu = document.getElementById("settingsMenu");
+  menu.classList.toggle("show");
+  if(menu.classList.contains("show")) populateExportMonths();
 }
 document.addEventListener("click", function(e){
   const wrap = document.querySelector(".settings-wrap");
@@ -877,13 +916,26 @@ function addCategoryEntry(cat){
   const amt = parseFloat(amtEl.value);
   if(!amt || amt<=0) return;
   const words = desc.split(/\s+/).filter(Boolean);
-  const finalDesc = words.slice(0,10).join(" ") || cat;
+  let label = "";
+  const labelEl = document.getElementById("label_"+catId(cat));
+  if(labelEl){
+    label = labelEl.value.trim();
+    if(!label && words.length === 0){
+      flash("Type a name or description");
+      return;
+    }
+  }
+  const finalDesc = words.slice(0,10).join(" ") || label || cat;
   const monthKey = monthKeyFromDate(selectedDate);
   const day = ensureDay(monthKey, selectedDate);
-  day[cat].push({ desc: finalDesc, amt: amt });
+  if(!day[cat]) day[cat] = [];
+  const entry = { desc: finalDesc, amt: amt };
+  if(label) entry.label = label;
+  day[cat].push(entry);
   saveDB();
   descEl.value = "";
   amtEl.value = "";
+  if(labelEl) labelEl.value = "";
   flash(cat + " added");
   renderAll();
 }
@@ -1072,12 +1124,13 @@ function renderCategoryEntryList(){
     const idc = catId(cat);
     det.innerHTML = `
       <summary>
-        <span>${cat}</span>
+        <span>${catLabel(cat)}</span>
         <span class="cat-total">${entries.length ? fmt(subtotal) : ""}</span>
       </summary>
       <div class="cat-body">
+        ${cat === "Custom" ? `<div class="row"><input type="text" id="label_${idc}" placeholder="Write anything (e.g. Gift, Donation, Repair)"></div>` : ""}
         <div class="row">
-          <input type="text" id="desc_${idc}" placeholder="Description (max 10 words)">
+          <input type="text" id="desc_${idc}" placeholder="${cat === "Custom" ? "Details (optional, max 10 words)" : "Description (max 10 words)"}">
         </div>
         <div class="row">
           <input type="number" id="amt_${idc}" placeholder="Amount (৳)" inputmode="decimal">
@@ -1094,7 +1147,7 @@ function renderCategoryEntryList(){
       entries.forEach((e,idx)=>{
         const row = document.createElement("div");
         row.className = "entry-row";
-        row.innerHTML = `<span class="desc">${escapeHtml(e.desc)}</span><span class="amt">${fmt(e.amt)}</span>`;
+        row.innerHTML = `<span class="desc">${escapeHtml(entryText(e))}</span><span class="amt">${fmt(e.amt)}</span>`;
         const delBtn = document.createElement("button");
         delBtn.className = "btn-del";
         delBtn.textContent = "✕";
@@ -1128,11 +1181,11 @@ function renderDaywise(monthKey){
       if(sub<=0) return;
       let rows = "";
       entries.forEach(e=>{
-        rows += `<div class="entry-row"><span class="desc">${escapeHtml(e.desc)}</span><span class="amt">${fmt(e.amt)}</span></div>`;
+        rows += `<div class="entry-row"><span class="desc">${escapeHtml(entryText(e))}</span><span class="amt">${fmt(e.amt)}</span></div>`;
       });
       catsHtml += `
         <details class="cat-block">
-          <summary><span>${c}</span><span class="cat-total">${fmt(sub)}</span></summary>
+          <summary><span>${catLabel(c)}</span><span class="cat-total">${fmt(sub)}</span></summary>
           <div class="cat-body">${rows}</div>
         </details>
       `;
@@ -1159,7 +1212,7 @@ function renderCategoryTotals(monthKey){
     if(m){
       Object.keys(m.days).sort().reverse().forEach(dayIso=>{
         (m.days[dayIso][cat] || []).forEach(e=>{
-          entries.push({ date: dayIso, desc: e.desc, amt: e.amt });
+          entries.push({ date: dayIso, desc: entryText(e), amt: e.amt });
         });
       });
     }
@@ -1173,7 +1226,7 @@ function renderCategoryTotals(monthKey){
       rows += `<div class="entry-row"><span class="desc">${fmtDateNice(e.date)} — ${escapeHtml(e.desc)}</span><span class="amt">${fmt(e.amt)}</span></div>`;
     });
     det.innerHTML = `
-      <summary><span>${cat}</span><span class="cat-total">${fmt(total)}</span></summary>
+      <summary><span>${catLabel(cat)}</span><span class="cat-total">${fmt(total)}</span></summary>
       <div class="cat-body">${rows}</div>
     `;
     container.appendChild(det);
@@ -1252,7 +1305,7 @@ function renderMonthWiseSummary(){
       const entries = [];
       Object.keys(m.days).sort().reverse().forEach(dayIso=>{
         (m.days[dayIso][cat] || []).forEach(e=>{
-          entries.push({ date: dayIso, desc: e.desc, amt: e.amt });
+          entries.push({ date: dayIso, desc: entryText(e), amt: e.amt });
         });
       });
       const subtotal = entries.reduce((s,e)=>s+e.amt,0);
@@ -1263,7 +1316,7 @@ function renderMonthWiseSummary(){
       });
       rows += `
         <details class="cat-block">
-          <summary><span>${cat}</span><span class="cat-total">${fmt(subtotal)}</span></summary>
+          <summary><span>${catLabel(cat)}</span><span class="cat-total">${fmt(subtotal)}</span></summary>
           <div class="cat-body">${entryRows}</div>
         </details>
       `;
@@ -1555,6 +1608,287 @@ function escapeHtml(str){
   const div = document.createElement("div");
   div.textContent = str;
   return div.innerHTML;
+}
+
+/* ============ EXCEL EXPORT (offline .xlsx writer, no libraries) ============ */
+function allDataMonthKeys(){
+  const set = {};
+  Object.keys(DB.months).forEach(k => set[k] = 1);
+  Object.keys(DB.withdrawals||{}).forEach(k => set[k] = 1);
+  (DB.savingsWithdrawals||[]).forEach(e => set[monthKeyFromDate(e.date)] = 1);
+  (DB.loans||[]).forEach(e => set[monthKeyFromDate(e.date)] = 1);
+  (DB.loanPayments||[]).forEach(e => set[monthKeyFromDate(e.date)] = 1);
+  return Object.keys(set).sort().reverse();
+}
+
+function populateExportMonths(){
+  const sel = document.getElementById("exportMonthSel");
+  const keep = sel.value || "ALL";
+  sel.innerHTML = '<option value="ALL">All months</option>';
+  allDataMonthKeys().forEach(k=>{
+    const o = document.createElement("option");
+    o.value = k; o.textContent = monthLabelFromKey(k);
+    sel.appendChild(o);
+  });
+  sel.value = Array.from(sel.options).some(o => o.value === keep) ? keep : "ALL";
+}
+
+function setAllExportChecks(v){
+  ["exp_expenses","exp_catsummary","exp_budget","exp_withdraw","exp_savwd","exp_loans","exp_loanpaid"]
+    .forEach(id => document.getElementById(id).checked = v);
+}
+
+function r2(n){ return Math.round(n*100)/100; }
+
+function buildExportSheets(sel, monthFilter){
+  const inM = key => monthFilter === "ALL" || key === monthFilter;
+  const sheets = [];
+
+  if(sel.expenses){
+    const rows = [["Date","Month","Category","Name / Description","Amount (৳)"]];
+    let total = 0;
+    Object.keys(DB.months).sort().forEach(key=>{
+      if(!inM(key)) return;
+      const m = DB.months[key];
+      Object.keys(m.days).sort().forEach(d=>{
+        CATEGORIES.forEach(c=>{
+          (m.days[d][c]||[]).forEach(e=>{
+            rows.push([d, monthLabelFromKey(key), catLabel(c), entryText(e), r2(e.amt)]);
+            total += e.amt;
+          });
+        });
+      });
+    });
+    rows.push(["","","","Total", r2(total)]);
+    sheets.push({ name: "Expenses", rows: rows });
+  }
+
+  if(sel.catsummary){
+    const rows = [["Month"].concat(CATEGORIES.map(catLabel), ["Total"])];
+    Object.keys(DB.months).sort().forEach(key=>{
+      if(!inM(key)) return;
+      const t = monthCategoryTotals(key);
+      const cost = monthTotalCost(key);
+      if(cost === 0) return;
+      rows.push([monthLabelFromKey(key)].concat(CATEGORIES.map(c => r2(t[c]||0)), [r2(cost)]));
+    });
+    sheets.push({ name: "Category Totals", rows: rows });
+  }
+
+  if(sel.budget){
+    const rows = [["Month","Income (৳)","Savings (৳)","Total Cost (৳)","Remaining (৳)","Total Withdraw (৳)"]];
+    const keys = {};
+    Object.keys(DB.months).forEach(k => keys[k] = 1);
+    Object.keys(DB.withdrawals||{}).forEach(k => keys[k] = 1);
+    Object.keys(keys).sort().forEach(key=>{
+      if(!inM(key)) return;
+      const inc = monthIncome(key), cost = monthTotalCost(key), sav = monthNetSavings(key), wd = monthWithdrawTotal(key);
+      rows.push([monthLabelFromKey(key), r2(inc), r2(sav), r2(cost), r2(inc - cost - sav), r2(wd)]);
+    });
+    sheets.push({ name: "Monthly Budget", rows: rows });
+  }
+
+  if(sel.withdraw){
+    const rows = [["Month","Serial No.","Date","Purpose","Amount (৳)"]];
+    let total = 0;
+    Object.keys(DB.withdrawals||{}).sort().forEach(key=>{
+      if(!inM(key)) return;
+      (DB.withdrawals[key]||[]).forEach(e=>{
+        rows.push([monthLabelFromKey(key), e.sl, e.date, e.purpose, r2(e.amount)]);
+        total += e.amount;
+      });
+    });
+    rows.push(["","","","Total", r2(total)]);
+    sheets.push({ name: "Withdrawals", rows: rows });
+  }
+
+  if(sel.savwd){
+    const rows = [["Date","Month","Purpose","Amount (৳)"]];
+    let total = 0;
+    (DB.savingsWithdrawals||[]).slice().sort((a,b)=>a.date.localeCompare(b.date)).forEach(e=>{
+      const key = monthKeyFromDate(e.date);
+      if(!inM(key)) return;
+      rows.push([e.date, monthLabelFromKey(key), e.purpose, r2(e.amount)]);
+      total += e.amount;
+    });
+    rows.push(["","","Total", r2(total)]);
+    sheets.push({ name: "Savings Withdrawals", rows: rows });
+  }
+
+  if(sel.loans){
+    const rows = [["Date","Loan To","Purpose","Sent By","Amount (৳)"]];
+    let total = 0;
+    (DB.loans||[]).slice().sort((a,b)=>a.date.localeCompare(b.date)).forEach(e=>{
+      if(!inM(monthKeyFromDate(e.date))) return;
+      rows.push([e.date, e.to || "—", e.purpose, e.method, r2(e.amount)]);
+      total += e.amount;
+    });
+    rows.push(["","","","Total", r2(total)]);
+    rows.push(["","","","Total loan outstanding (all time)", r2(totalLoanOutstanding())]);
+    sheets.push({ name: "Loans", rows: rows });
+  }
+
+  if(sel.loanpaid){
+    const rows = [["Date","Note","Amount (৳)"]];
+    let total = 0;
+    (DB.loanPayments||[]).slice().sort((a,b)=>a.date.localeCompare(b.date)).forEach(e=>{
+      if(!inM(monthKeyFromDate(e.date))) return;
+      rows.push([e.date, e.note, r2(e.amount)]);
+      total += e.amount;
+    });
+    rows.push(["","Total", r2(total)]);
+    sheets.push({ name: "Loan Payments", rows: rows });
+  }
+  return sheets;
+}
+
+function xlsxColName(i){
+  let s = ""; i++;
+  while(i > 0){ const m = (i-1) % 26; s = String.fromCharCode(65+m) + s; i = Math.floor((i-1)/26); }
+  return s;
+}
+function xmlEsc(v){
+  return String(v).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;")
+    .replace(/[\u0000-\u0008\u000B\u000C\u000E-\u001F]/g,"");
+}
+
+function xlsxSheetXml(rows){
+  const widths = [];
+  rows.forEach(r => r.forEach((v,i)=>{
+    const len = String(v === undefined || v === null ? "" : v).length;
+    widths[i] = Math.max(widths[i] || 8, Math.min(len + 3, 50));
+  }));
+  let x = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>' +
+    '<worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main">' +
+    '<sheetViews><sheetView workbookViewId="0"><pane ySplit="1" topLeftCell="A2" activePane="bottomLeft" state="frozen"/></sheetView></sheetViews>' +
+    '<cols>' + widths.map((w,i)=>'<col min="'+(i+1)+'" max="'+(i+1)+'" width="'+w+'" customWidth="1"/>').join("") + '</cols>' +
+    '<sheetData>';
+  rows.forEach((r, ri)=>{
+    x += '<row r="'+(ri+1)+'">';
+    r.forEach((v, ci)=>{
+      if(v === "" || v === undefined || v === null) return;
+      const ref = xlsxColName(ci) + (ri+1);
+      if(typeof v === "number"){
+        x += '<c r="'+ref+'" s="2"><v>'+v+'</v></c>';
+      } else {
+        x += '<c r="'+ref+'"'+(ri === 0 ? ' s="1"' : '')+' t="inlineStr"><is><t xml:space="preserve">'+xmlEsc(v)+'</t></is></c>';
+      }
+    });
+    x += '</row>';
+  });
+  return x + '</sheetData></worksheet>';
+}
+
+const CRC_TABLE = (function(){
+  const t = [];
+  for(let n=0;n<256;n++){
+    let c = n;
+    for(let k=0;k<8;k++) c = (c & 1) ? (0xEDB88320 ^ (c >>> 1)) : (c >>> 1);
+    t[n] = c >>> 0;
+  }
+  return t;
+})();
+function crc32(bytes){
+  let c = 0xFFFFFFFF;
+  for(let i=0;i<bytes.length;i++) c = CRC_TABLE[(c ^ bytes[i]) & 0xFF] ^ (c >>> 8);
+  return (c ^ 0xFFFFFFFF) >>> 0;
+}
+function makeZip(files){
+  const enc = new TextEncoder();
+  const u16 = n => [n & 255, (n >>> 8) & 255];
+  const u32 = n => [n & 255, (n >>> 8) & 255, (n >>> 16) & 255, (n >>> 24) & 255];
+  const parts = [], central = [];
+  let offset = 0;
+  files.forEach(f=>{
+    const nameB = enc.encode(f.name), data = enc.encode(f.content);
+    const crc = crc32(data), size = data.length;
+    const local = new Uint8Array([0x50,0x4b,0x03,0x04, ...u16(20), ...u16(0x0800), ...u16(0), ...u16(0), ...u16(33),
+      ...u32(crc), ...u32(size), ...u32(size), ...u16(nameB.length), ...u16(0)]);
+    parts.push(local, nameB, data);
+    central.push({ nameB, crc, size, offset });
+    offset += local.length + nameB.length + size;
+  });
+  const cdStart = offset;
+  central.forEach(c=>{
+    const hdr = new Uint8Array([0x50,0x4b,0x01,0x02, ...u16(20), ...u16(20), ...u16(0x0800), ...u16(0), ...u16(0), ...u16(33),
+      ...u32(c.crc), ...u32(c.size), ...u32(c.size), ...u16(c.nameB.length), ...u16(0), ...u16(0), ...u16(0), ...u16(0), ...u32(0), ...u32(c.offset)]);
+    parts.push(hdr, c.nameB);
+    offset += hdr.length + c.nameB.length;
+  });
+  const cdSize = offset - cdStart;
+  parts.push(new Uint8Array([0x50,0x4b,0x05,0x06, ...u16(0), ...u16(0), ...u16(central.length), ...u16(central.length), ...u32(cdSize), ...u32(cdStart), ...u16(0)]));
+  return new Blob(parts, { type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" });
+}
+
+function buildXlsxBlob(sheets){
+  const used = {};
+  const names = sheets.map((sh, i)=>{
+    let n = sh.name.replace(/[\\\/\?\*\[\]:]/g, " ").slice(0, 31) || ("Sheet" + (i+1));
+    while(used[n.toLowerCase()]) n = n.slice(0, 28) + "_" + (i+1);
+    used[n.toLowerCase()] = 1;
+    return n;
+  });
+  const NS = 'http://schemas.openxmlformats.org/spreadsheetml/2006/main';
+  const RNS = 'http://schemas.openxmlformats.org/officeDocument/2006/relationships';
+  const PNS = 'http://schemas.openxmlformats.org/package/2006/relationships';
+  const files = [];
+  files.push({ name: "[Content_Types].xml", content:
+    '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types">' +
+    '<Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/>' +
+    '<Default Extension="xml" ContentType="application/xml"/>' +
+    '<Override PartName="/xl/workbook.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml"/>' +
+    sheets.map((_,i)=>'<Override PartName="/xl/worksheets/sheet'+(i+1)+'.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/>').join("") +
+    '<Override PartName="/xl/styles.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.styles+xml"/></Types>' });
+  files.push({ name: "_rels/.rels", content:
+    '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="'+PNS+'">' +
+    '<Relationship Id="rId1" Type="'+RNS+'/officeDocument" Target="xl/workbook.xml"/></Relationships>' });
+  files.push({ name: "xl/workbook.xml", content:
+    '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><workbook xmlns="'+NS+'" xmlns:r="'+RNS+'"><sheets>' +
+    names.map((n,i)=>'<sheet name="'+xmlEsc(n)+'" sheetId="'+(i+1)+'" r:id="rId'+(i+1)+'"/>').join("") + '</sheets></workbook>' });
+  files.push({ name: "xl/_rels/workbook.xml.rels", content:
+    '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="'+PNS+'">' +
+    sheets.map((_,i)=>'<Relationship Id="rId'+(i+1)+'" Type="'+RNS+'/worksheet" Target="worksheets/sheet'+(i+1)+'.xml"/>').join("") +
+    '<Relationship Id="rId'+(sheets.length+1)+'" Type="'+RNS+'/styles" Target="styles.xml"/></Relationships>' });
+  files.push({ name: "xl/styles.xml", content:
+    '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><styleSheet xmlns="'+NS+'">' +
+    '<fonts count="2"><font><sz val="11"/><name val="Calibri"/></font><font><b/><sz val="11"/><name val="Calibri"/></font></fonts>' +
+    '<fills count="2"><fill><patternFill patternType="none"/></fill><fill><patternFill patternType="gray125"/></fill></fills>' +
+    '<borders count="1"><border><left/><right/><top/><bottom/><diagonal/></border></borders>' +
+    '<cellStyleXfs count="1"><xf numFmtId="0" fontId="0" fillId="0" borderId="0"/></cellStyleXfs>' +
+    '<cellXfs count="3"><xf numFmtId="0" fontId="0" fillId="0" borderId="0" xfId="0"/>' +
+    '<xf numFmtId="0" fontId="1" fillId="0" borderId="0" xfId="0" applyFont="1"/>' +
+    '<xf numFmtId="4" fontId="0" fillId="0" borderId="0" xfId="0" applyNumberFormat="1"/></cellXfs>' +
+    '<cellStyles count="1"><cellStyle name="Normal" xfId="0" builtinId="0"/></cellStyles></styleSheet>' });
+  sheets.forEach((sh,i)=> files.push({ name: "xl/worksheets/sheet"+(i+1)+".xml", content: xlsxSheetXml(sh.rows) }));
+  return makeZip(files);
+}
+
+function exportExcel(){
+  const sel = {
+    expenses: document.getElementById("exp_expenses").checked,
+    catsummary: document.getElementById("exp_catsummary").checked,
+    budget: document.getElementById("exp_budget").checked,
+    withdraw: document.getElementById("exp_withdraw").checked,
+    savwd: document.getElementById("exp_savwd").checked,
+    loans: document.getElementById("exp_loans").checked,
+    loanpaid: document.getElementById("exp_loanpaid").checked
+  };
+  if(!Object.values(sel).some(Boolean)){
+    flash("Select at least one item");
+    return;
+  }
+  const monthFilter = document.getElementById("exportMonthSel").value || "ALL";
+  const sheets = buildExportSheets(sel, monthFilter);
+  const blob = buildXlsxBlob(sheets);
+  const filename = "HiMus-Budget-" + (monthFilter === "ALL" ? "All-Months" : monthFilter) + "-" + todayISO() + ".xlsx";
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url; a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  setTimeout(()=>URL.revokeObjectURL(url), 4000);
+  flash("Excel file downloaded");
 }
 
 /* ============ BACKUP / RESTORE ============ */
